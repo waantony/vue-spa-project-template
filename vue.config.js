@@ -1,7 +1,7 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const px2rem = require('postcss-px2rem')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const pxtorem = require('postcss-pxtorem')
 
 // 环境变量获取
 const { VUE_APP_baseURL, NODE_ENV } = process.env
@@ -101,8 +101,9 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          px2rem({
-            remUnit: 100,
+          pxtorem({
+            rootValue: 100,
+            propList: ['*'],
           }),
         ],
       },
