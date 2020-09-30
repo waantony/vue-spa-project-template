@@ -13,7 +13,7 @@ const isProduction = NODE_ENV === 'production'
 const pathJoin = dir => path.join(__dirname, dir)
 
 module.exports = {
-  lintOnSave: false,
+  lintOnSave: 'warning',
   publicPath: './',
   outputDir: 'dist',
   productionSourceMap: false,
