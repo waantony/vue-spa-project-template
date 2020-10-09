@@ -19,17 +19,23 @@ module.exports = {
   productionSourceMap: false,
   configureWebpack (config) {
 
+    config.resolve = {
+      extensions: ['.js', '.vue', '.json'],
+      alias: {
+        '@': pathJoin('src'),
+      },
+    }
+
     // 从外部引入的库，比如在 index.html 中引入 cdn 地址
     config.externals = {
       // key 表示 import x from 'key'
       // value 表示外部引入的库暴露的全局变量名
-      'fromPath': 'globalVarName',
-      // 'BMap': 'BMap',
       'vue': 'Vue',
       'vue-router': 'VueRouter',
       'vuex': 'Vuex',
       'axios': 'axios',
       'vant': 'vant',
+      // 'BMap': 'BMap',
       // 'echarts': 'echarts',
       // 'videojs': 'videojs',
       // 'lodash': '_',
@@ -61,12 +67,6 @@ module.exports = {
 
       // 修改 cacheGroups 配置
       // require('./configs/cacheGroups')(config)
-    }
-    config.resolve = {
-      extensions: ['.js', '.vue', '.json'],
-      alias: {
-        '@': pathJoin('src'),
-      },
     }
   },
   // webpack chain
