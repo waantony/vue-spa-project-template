@@ -55,3 +55,20 @@ export const getCurrentPageName = (url = location ? location.href : '') => {
   const result = url.match(reg)
   return result[1]
 }
+
+/**
+ * 移除 url 的某些查询参数（query）
+ *
+ * @param { Array<string> } queryKeyList 需要移除的 query 的 key
+ * @param { string } url 目标 url 地址，默认为当前访问的地址
+ */
+export const removeSomeQuery = (queryKeyList, url = location.href) => {
+  const queryObj = querystringToObj(url)
+  queryKeyList.forEach(key => {
+    queryObj[key] && Reflect.deleteProperty(queryObj, key)
+  })
+  const questionMarkIndex = url.lastIndexOf('?')
+  const end = questionMarkIndex < -1 ? undefined : questionMarkIndex
+  const targetUrl = `${url.slice(0, end)}?${objToQuerystring(queryObj)}`
+  return targetUrl
+}
