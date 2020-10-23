@@ -68,7 +68,7 @@ export const removeSomeQuery = (queryKeyList, url = location.href) => {
     queryObj[key] && Reflect.deleteProperty(queryObj, key)
   })
   const questionMarkIndex = url.lastIndexOf('?')
-  const end = questionMarkIndex < -1 ? undefined : questionMarkIndex
+  const end = questionMarkIndex < 0 ? undefined : questionMarkIndex
   const targetUrl = `${url.slice(0, end)}?${objToQuerystring(queryObj)}`
   return targetUrl
 }
