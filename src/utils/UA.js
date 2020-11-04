@@ -37,3 +37,9 @@ export const isInWeiXin = isInWeiXinRegExp.test(UA)
 
 // 获取当前设备安卓版本号  比如 8.0.0 返回 [8, 0, 0]
 export const AndroidVersion = UA.match(AndroidVersionRegExp)?.slice(1, 4).map(Number)
+
+// 是否在安卓中
+export const isInAndroid = /Android|Linux/iu.test(UA)
+
+// 是否在 ios 中
+export const isInIphone = /iPhone|ios/iu.test(UA)

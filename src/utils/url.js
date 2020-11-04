@@ -72,3 +72,19 @@ export const removeSomeQuery = (queryKeyList, url = location.href) => {
   const targetUrl = `${url.slice(0, end)}?${objToQuerystring(queryObj)}`
   return targetUrl
 }
+
+/**
+ * 根据传入的 url 判断是否需要加上 baseURL
+ *
+ * @param { String } url 一个 url 字符串
+ * @returns { String } 处理完成用于直接使用的 url 地址
+ * @example
+ * addBaseURL('/upload/1.jpg') // http://xxx.com/upload/1.jpg
+ * addBaseURL('http://xxx.com/upload/1.jpg') // http://xxx.com/upload/1.jpg
+ */
+export const addBaseURL = url => {
+  if (url.indexOf('/') === 0) {
+    return process.env.VUE_APP_baseURL + url
+  }
+  return url
+}
