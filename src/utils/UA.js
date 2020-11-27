@@ -43,3 +43,17 @@ export const isInAndroid = /Android|Linux/iu.test(UA)
 
 // 是否在 ios 中
 export const isInIphone = /iPhone|ios/iu.test(UA)
+
+export const isOldBrowser = (option = {}) => {
+  const { UAParser } = window
+  const engine = new UAParser().getEngine()
+  const { name, version } = engine
+  const versionMajor = version.match(/^\d*/)[0]
+  return Object.entries(option).some(([key, value]) => name === key && versionMajor < value)
+}
+
+const isOut = isOldBrowser({
+  Blink: 71,
+})
+
+console.log(isOut)

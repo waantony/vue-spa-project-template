@@ -12,10 +12,9 @@ const routes = [
     component: Home,
   },
   {
-    path: '/lazyload',
-    name: 'lazyload',
-    component: () => import('@/views/Home'),
-    meta: { title: '懒加载路由标题', keepAlive: true },
+    path: '/test',
+    component: () => import('@/views/test'),
+    meta: { title: '测试页面' },
   },
 ]
 
