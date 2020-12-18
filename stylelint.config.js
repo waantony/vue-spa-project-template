@@ -17,5 +17,8 @@ module.exports = {
     'at-rule-no-unknown': [true, {
       'ignoreAtRules': ['each', 'extend', 'for', 'function', 'if', 'else', 'warn', 'include', 'mixin', 'return'],
     }],
+    'unit-no-unknown': [true, {
+      ignoreUnits: ['rpx'],
+    }],
   },
 }
