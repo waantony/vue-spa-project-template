@@ -29,9 +29,12 @@
 }
 
 // 多行显示省略号
-@mixin multiline-ellipsis () {
+@mixin multiline-ellipsis ($count: 2) {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: $count;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
