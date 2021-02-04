@@ -2,17 +2,20 @@ const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const pxtorem = require('postcss-pxtorem')
+const getPages = require('./configs/getPages')
 
 // 环境变量获取
-const { VUE_APP_baseURL, NODE_ENV } = process.env
+const { VUE_APP_baseURL, NODE_ENV, VUE_APP_PLAT } = process.env
 
 // 是否是生产环境
 const isProduction = NODE_ENV === 'production'
+const isPC = VUE_APP_PLAT === 'PC'
 
 // 访问绝对路径
 const pathJoin = dir => path.join(__dirname, dir)
 
 module.exports = {
+  pages: getPages('src/pages/*'), // 多页配置
   lintOnSave: 'warning',
   publicPath: './',
   outputDir: 'dist',
@@ -65,8 +68,6 @@ module.exports = {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
 
-      // 修改 cacheGroups 配置
-      // require('./configs/cacheGroups')(config)
     }
   },
   // webpack chain
@@ -101,10 +102,12 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          pxtorem({
-            rootValue: 100,
-            propList: ['*'],
-          }),
+          isPC
+            ? pxtorem({
+              rootValue: 100,
+              propList: ['*'],
+            })
+            : undefined,
         ],
       },
     },

@@ -1,20 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routerGuards from './routerGuards'
-import Home from '@/views/Home'
-
+import Home from '../views/home'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home,
+    meta: { title: '首页', keepAlive: true },
   },
   {
-    path: '/test',
-    component: () => import('@/views/test'),
-    meta: { title: '测试页面' },
+    path: '/lazy',
+    component: () => import('../views/home'),
+    meta: { title: '首页', keepAlive: true },
   },
 ]
 

@@ -1,90 +1,46 @@
 @import './mixins.scss';
-@import './variables.scss'; // 自定义变量
 
 // 本文件为全局样式配置
 
-// 全局 class 样式
-.flex-between {
-  @include flex();
-}
-.flex-around {
-  @include flex($justify: space-around);
-}
-.flex-start {
-  @include flex($justify: flex-start);
-}
-.flex-end {
-  @include flex($justify: flex-end);
-}
-.flex-center {
-  @include flex($justify: center);
+// 单行显示省略号
+.g-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-// 元素交叉轴拉伸
-.flex-between-s {
-  @include flex();
-
-  align-items: stretch;
-}
-.flex-around-s {
-  @include flex($justify: space-around);
-
-  align-items: stretch;
-}
-.flex-start-s {
-  @include flex($justify: flex-start);
-
-  align-items: stretch;
-}
-.flex-end-s {
-  @include flex($justify: flex-end);
-
-  align-items: stretch;
-}
-.flex-center-s {
-  @include flex($justify: center);
-
-  align-items: stretch;
+// 两行显示省略号
+.g-ellipsis-2 {
+  @include multiline-ellipsis(2);
 }
 
-.flex-col-between {
-  @include flex($direction: column);
-}
-.flex-col-around {
-  @include flex($justify: space-around, $direction: column);
-}
-.flex-col-start {
-  @include flex($justify: flex-start, $direction: column);
-}
-.flex-col-end {
-  @include flex($justify: flex-end, $direction: column);
-}
-.flex-col-center {
-  @include flex($justify: center, $direction: column);
+// 三行显示省略号
+.g-ellipsis-3 {
+  @include multiline-ellipsis(3);
 }
 
-.flex-col-between-s {
-  @include flex($direction: column);
-
-  align-items: stretch;
+// 旋转动画关键帧
+@keyframes g-keyframes-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-.flex-col-around-s {
-  @include flex($justify: space-around, $direction: column);
 
-  align-items: stretch;
+// 旋转 class
+.g-rotate {
+  animation: 0.8s g-keyframes-rotate linear infinite;
 }
-.flex-col-start-s {
-  @include flex($justify: flex-start, $direction: column);
 
-  align-items: stretch;
-}
-.flex-col-end-s {
-  @include flex($justify: flex-end, $direction: column);
-
-  align-items: stretch;
-}
-.flex-col-center-s {
-  @include flex($justify: center, $direction: column);
-
-  align-items: stretch;
+// 基础按钮样式
+.g-btn-reset {
+  border: 0;
+  outline: 0;
+  &::after {
+    border: 0;
+    outline: 0;
+    display: none;
+  }
 }

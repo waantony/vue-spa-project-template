@@ -20,13 +20,13 @@ export default new Vuex.Store({
      *
      * @param { Object } payload 要改变的 state 中的属性（key）和值(value)组成的对象，或对象数组
      */
-    handleChangeState (state, payload) {
+    handleChangeStore (state, payload) {
       const payloadType = getType(payload)
       if (payloadType !== 'Object') {
         return
       }
-      Object.entries(payload).forEach(entry => {
-        state[entry[0]] = entry[1]
+      Object.entries(payload).forEach(([key, value]) => {
+        state[key] = value
       })
     },
     /**
@@ -44,12 +44,12 @@ export default new Vuex.Store({
     /**
      * 请求用户信息的方法
      *
-     * @param { * } payload 用户传入的参数
+     * @param { object } payload 用户传入的参数
      */
     actionReqUserInfo ({ commit, dispatch, state, getters }, payload) {
       return new Promise((resolve, reject) => {
         // 发送请求，在 .then() 中执行以下代码
-        commit('handleChangeState', {
+        commit('handleChangeStore', {
           userInfo: {}, // {} 应为请求响应回来的数据
         })
         resolve()
