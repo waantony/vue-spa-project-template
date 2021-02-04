@@ -38,6 +38,7 @@ module.exports = {
       'vuex': 'Vuex',
       'axios': 'axios',
       'vant': 'vant',
+      'element-ui': 'ELEMENT',
       // 'BMap': 'BMap',
       // 'echarts': 'echarts',
       // 'videojs': 'videojs',
@@ -45,7 +46,6 @@ module.exports = {
       // 'qq': 'qq',
       // 'wx': 'wx',
       // 'callapp-lib': 'CallApp',
-      // 'element-ui': 'ELEMENT',
       // 'xlsx': 'XLSX',
     }
 
@@ -101,14 +101,14 @@ module.exports = {
   css: {
     loaderOptions: {
       postcss: {
-        plugins: [
-          isPC
-            ? pxtorem({
+        plugins: isPC
+          ? []
+          : [
+            pxtorem({
               rootValue: 100,
               propList: ['*'],
-            })
-            : undefined,
-        ],
+            }),
+          ],
       },
     },
   },

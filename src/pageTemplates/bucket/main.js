@@ -4,10 +4,10 @@ import store from './store'
 import App from './App.vue'
 import '@/styles/index.scss'
 
-// 全部引入组件
-import ElementUI from 'element-ui'
+// 通过 CDN 引入的组件库
+const ElementUI = window.ELEMENT
 
-// 全局注册组件
+// 注册组件库
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
