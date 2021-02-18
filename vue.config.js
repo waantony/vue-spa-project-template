@@ -3,13 +3,13 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const pxtorem = require('postcss-pxtorem')
 const getPages = require('./configs/getPages')
-
 // 环境变量获取
+// eslint-disable-next-line no-unused-vars
 const { VUE_APP_baseURL, NODE_ENV, VUE_APP_PLAT } = process.env
 
 // 是否是生产环境
 const isProduction = NODE_ENV === 'production'
-const isPC = VUE_APP_PLAT === 'PC'
+// const isPC = VUE_APP_PLAT === 'PC'
 
 // 访问绝对路径
 const pathJoin = dir => path.join(__dirname, dir)
@@ -39,14 +39,14 @@ module.exports = {
       'axios': 'axios',
       'vant': 'vant',
       'element-ui': 'ELEMENT',
-      // 'BMap': 'BMap',
-      // 'echarts': 'echarts',
-      // 'videojs': 'videojs',
-      // 'lodash': '_',
-      // 'qq': 'qq',
-      // 'wx': 'wx',
-      // 'callapp-lib': 'CallApp',
-      // 'xlsx': 'XLSX',
+      'echarts': 'echarts',
+      'BMap': 'BMap',
+      'videojs': 'videojs',
+      'lodash': '_',
+      'qq': 'qq',
+      'wx': 'wx',
+      'callapp-lib': 'CallApp',
+      'xlsx': 'XLSX',
     }
 
     // 生产环境配置
@@ -70,20 +70,7 @@ module.exports = {
 
     }
   },
-  // webpack chain
   chainWebpack (config) {
-    const addStyleResource = rule => {
-      rule.use('style-resource')
-        .loader('style-resources-loader')
-        .options({
-          patterns: [
-            pathJoin('src/styles/variables.scss'),
-            pathJoin('src/styles/mixins.scss'),
-          ],
-        })
-    }
-    const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
-    types.forEach(type => addStyleResource(config.module.rule('scss').oneOf(type)))
   },
   devServer: {
     // open: true,
@@ -101,14 +88,15 @@ module.exports = {
   css: {
     loaderOptions: {
       postcss: {
-        plugins: isPC
-          ? []
-          : [
-            pxtorem({
-              rootValue: 100,
-              propList: ['*'],
-            }),
-          ],
+        plugins: [
+          pxtorem({
+            rootValue: 100, // rem 大小
+            propList: ['*'],
+          }),
+        ],
+      },
+      scss: {
+        prependData: '@import "~@/styles/variables.scss";@import "~@/styles/mixins.scss";',
       },
     },
   },
