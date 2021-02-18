@@ -38,3 +38,12 @@
   word-wrap: break-word;
   text-overflow: ellipsis;
 }
+
+// 渐变色文字
+@mixin linear-gradient-text ($params...) {
+  background: linear-gradient($params);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
