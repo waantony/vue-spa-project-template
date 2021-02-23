@@ -3,7 +3,8 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 // npm_config_argv: {"remain":[],"cooked":["run","serve"],"original":["run","serve"]}
 // npm_config_argv: {"remain":[],"cooked":["run","serve","--page-index"],"original":["run","serve","--page-index"]}
-const originalList = JSON.parse(process.env.npm_config_argv).original || []
+console.log('-------------', process.env.npm_config_argv)
+const originalList = JSON.parse(process.env.npm_config_argv || {}).original || []
 const runPageParam = originalList.find(item => item.startsWith('--page-'))
 
 const runPage = runPageParam && runPageParam.replace('--page-', '')

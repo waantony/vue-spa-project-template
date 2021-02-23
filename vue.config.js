@@ -58,11 +58,11 @@ module.exports = {
         openAnalyzer: false,
       }))
 
-      // 启用 gzip 压缩插件
-      config.plugins.push(new CompressionWebpackPlugin({
-        test: /\.js$|\.html$|\.css$/u,
-        threshold: 4096, // 超过 4kb 压缩
-      }))
+      // // 启用 gzip 压缩插件
+      // config.plugins.push(new CompressionWebpackPlugin({
+      //   test: /\.js$|\.html$|\.css$/u,
+      //   threshold: 4096, // 超过 4kb 压缩
+      // }))
 
       // terser 去除 console 和 debugger
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
@@ -71,6 +71,16 @@ module.exports = {
     }
   },
   chainWebpack (config) {
+    // 生产环境的配置
+    config.when(isProduction, config => {
+      // 启用 gzip 压缩插件
+      config
+        .plugin('compression-webpack-plugin')
+        .use(CompressionWebpackPlugin, [{
+          test: /\.js$|\.html$|\.css$/u,
+          threshold: 4096, // 超过 4kb 压缩
+        }])
+    })
   },
   devServer: {
     // open: true,
@@ -96,7 +106,7 @@ module.exports = {
         ],
       },
       scss: {
-        prependData: '@import "~@/styles/variables.scss";@import "~@/styles/mixins.scss";',
+        prependData: '@use "~@/styles/variables.scss" as *;@use "~@/styles/mixins.scss" as *;',
       },
     },
   },
