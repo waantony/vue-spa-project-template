@@ -1,7 +1,7 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const pxtorem = require('postcss-pxtorem')
+// const pxtorem = require('postcss-pxtorem')
 const getPages = require('./configs/getPages')
 // 环境变量获取
 // eslint-disable-next-line no-unused-vars
@@ -99,10 +99,10 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          pxtorem({
-            rootValue: 100, // rem 大小
-            propList: ['*'],
-          }),
+          // pxtorem({
+          //   rootValue: 100, // rem 大小
+          //   propList: ['*'],
+          // }),
         ],
       },
       scss: {
