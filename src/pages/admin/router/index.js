@@ -5,13 +5,17 @@ import routerGuards from './routerGuards'
 
 // 路由模块
 import controlledRoutes from './modules/controlledRoutes'
-import noLoginRoutes from './modules/noLoginRoutes'
-import notFoundRoutes from './modules/notFoundRoutes'
-import noPermissionRoutes from './modules/noPermissionRoutes'
-
+import publicRoutes from './modules/publicRoutes'
+import notMatchedRoutes from './modules/notMatchedRoutes'
+import LayoutRoutes from './modules/LayoutRoutes'
 Vue.use(VueRouter)
 
-const routes = [...noLoginRoutes, ...noPermissionRoutes, ...controlledRoutes, ...notFoundRoutes]
+const routes = [
+  ...publicRoutes,
+  ...controlledRoutes,
+  ...LayoutRoutes,
+  ...notMatchedRoutes,
+]
 
 // 实例化 router
 const router = new VueRouter({
